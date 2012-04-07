@@ -1,0 +1,39 @@
+﻿{% extends "base.html" %}
+
+{% block nav %}
+    <li><a href="reg">Зарегестрироваться</a></li>
+    <li class="active"><a href="users">Список участников</a></li>
+{% endblock nav %}
+
+{% block content %}
+
+{% if newuser is not none %}
+    <p class="success">Вы успешно зарегестрированы
+        с логином <b><code>{{newuser['login']}}</code></b>
+        и паролем <b><code>{{newuser['passwd']}}</code></b>
+    </p>    
+{% endif %}
+
+<table class="table">
+    <thead><tr>
+        <th>#</th>
+        <th>Логин</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Школа</th>
+        <th>Класс</th>
+    </tr></thead>
+    <tbody>
+    {% for u in users %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ u['login'] }}</td>
+            <td>{{ u['surname'] }}</td>
+            <td>{{ u['name'] }}</td>
+            <td>{{ u['school'] }}</td>
+            <td>{{ u['year'] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

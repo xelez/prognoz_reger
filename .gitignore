@@ -1,0 +1,12 @@
+## generic files to ignore
+*~
+*.swp
+*.lock
+
+##python specific
+*.pyc
+*.pyo
+
+#project specific
+/_/
+config.py

@@ -1,0 +1,104 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Список команд для регаты {{regata}} </title>
+	<style type="text/css">
+		* {font-family: Verdana;}
+		body {font-size: 18px; line-height: 1.5em;}
+		table.standing {
+			border: 1px solid #dedede;
+			border-collapse: collapse;
+			position: relative;
+			top: 50%;
+			margin: auto;
+		}
+		table.standing tbody {
+			border-bottom: 1px solid #000;
+		}
+		table.standing td {
+			border-top: 1px solid #dedede;
+			border-bottom: 1px solid #dedede;
+			overflow: hidden;
+			padding: .3em .7em;
+			text-align: justify;
+		}
+		table.standing th {
+			background: #f5f5ea;
+			border: 1px solid #dedede;
+			border-bottom-color: #000;
+		}
+		table.standing tr:hover {
+			background: #f6f6f6;
+		}
+		.last {border-right: 1px solid #000;}
+		
+		tr.editing input[type="text"] {border: 0; margin: 0; padding: 0; outline: 0;}
+		tr.editing input[type="text"]:focus {outline: 2px solid #dedede;}
+		tr.adding  input[type="text"] {outline: 1px solid #666;}
+	</style>
+</head>
+
+<body>
+    <center><h3>Список команд для регаты {{regata}}</h3></center>
+    <p>Последнее действие в системе: {{log}}</p>    
+    <p><a href="?sort=tid">Сортировать по ID</a>
+    <a href="?sort=name">Сортировать по Названию</a>
+    <a href="?sort=school">Сортировать по Школе</a>
+    <a href="?sort=captain">Сортировать по Капитану</a></p>
+    <table class="standing">
+	<thead> <tr>
+		<th>id</th>
+		<th>Название</th>
+		<th>Школа</th>
+		<th>Капитан</th>
+		<th>Участники</th>
+		<th>Действия</th>
+	</tr> </thead>
+	
+	<tbody>
+		{%  for t in teams %}
+		<tr class="editing"><form action="?act=add&sort={{sort}}" method="post">
+			<input name="tid" type="hidden" value="{{t['tid']}}">
+			<td>{{t['tid']}}</td>
+			<td><input size="20" name="name"    type="text" value="{{t['name']}}"></td>
+			<td><input size="20"  name="school"  type="text" value="{{t['school']}}"></td>
+			<td><input size="20" name="captain" type="text" value="{{t['captain']}}"></td>
+			<td>
+				<input size="30" name="member1" type="text" value="{{t['member1']}}"><br>
+				<input size="30" name="member2" type="text" value="{{t['member2']}}"><br>
+				<input size="30" name="member3" type="text" value="{{t['member3']}}">
+			</td>
+
+			<td><input type="submit" value="Изменить" onclick= >
+				<a href="?act=del&tid={{- t['tid'] -}}">Удалить</a>
+			</td>
+	    </form></tr>
+
+	    {% endfor %}
+	
+	    <tr class="adding"><form action="?act=add&sort={{sort}}" method="post">
+		<td><input size="2" name="tid" type="text" value=""></td>
+		<td><input id="focus" size="20" name="name" type="text" tabindex="-1"></td>
+		<td><input size="20" name="school" type="text" tabindex="2"></td>
+		<td><input size="20" name="captain" type="text" tabindex="3"></td>
+		<td>
+			<input size="30" name="member1" type="text" tabindex="4"><br>
+			<input size="30" name="member2" type="text" tabindex="5"><br>
+			<input size="30" name="member3" type="text" tabindex="6">
+		</td>
+
+		<td><input type="submit" value="Добавить" tabindex=7></td>
+	    </form></tr>
+
+<!--	    <script type="text/javascript">
+		    document.getElementById("focus").focus();
+	    </script> --!>
+	</tbody>    
+    </table>
+
+    <h2> Небольшая справка </h2>
+    <p>ID (или Team ID) - это идентефикатор команды, т.е. номер, который команды будут писать на листочках при сдаче задач, и который нужно указывать при добавлении команде баллов за задачу.</p>
+    <p>При добавлении команды ID присвается автоматически, если он не указан явно. Явное его указание не рекомендуется, ибо это может привести к затиранию данных, добавленных кем-то, кто редактирует страничку параллельно с вами с другого компьютера.</p>
+
+</body>
+</html>
