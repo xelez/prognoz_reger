@@ -9,6 +9,9 @@
         width: 80px;
         text-align: right;
     }
+    input {
+        padding-right: 30px;    
+    }
   </style>
   <title>Олимпиада</title>  
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -24,7 +27,7 @@
             <nav class="menu_main">
                 <ul>
                     {% block nav %}
-                    <li class="active"><a href="reg">Зарегестрироваться</a></li>
+                    <li class="active"><a href="reg">Зарегистрироваться</a></li>
                     <li><a href="users">Список участников</a></li>
                     {% endblock nav %}
                 </ul>

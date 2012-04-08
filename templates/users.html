@@ -1,14 +1,14 @@
 ﻿{% extends "base.html" %}
 
 {% block nav %}
-    <li><a href="reg">Зарегестрироваться</a></li>
+    <li><a href="reg">Зарегистрироваться</a></li>
     <li class="active"><a href="users">Список участников</a></li>
 {% endblock nav %}
 
 {% block content %}
 
 {% if newuser is not none %}
-    <p class="success">Вы успешно зарегестрированы
+    <p class="success">Вы успешно зарегистрированы
         с логином <b><code>{{newuser['login']}}</code></b>
         и паролем <b><code>{{newuser['passwd']}}</code></b>
     </p>    
