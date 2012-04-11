@@ -17,7 +17,7 @@ def users_app(req):
     res = Response()
     users = db["teams"]
     
-    u = users.find_one({'secret' : req.params.get('s')})
+    u = users.find_one({'secret' : req.params.get('s', '')})
 
     res.unicode_body = render('users.html',
         newuser = u,
