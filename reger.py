@@ -70,9 +70,11 @@ def reg_app(req):
     return res
 
 root_map = URLMap()
-root_map['/css/'] = DirectoryApp('./static/css/')
-root_map['/img/'] = DirectoryApp('./static/img/')
 root_map['/users'] = users_app
 root_map['/reg']  = reg_app
+
+if config.serve_static:
+    root_map['/css/'] = DirectoryApp('./static/css/')
+    root_map['/img/'] = DirectoryApp('./static/img/')
 
 root_app = root_map
