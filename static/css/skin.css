@@ -20,7 +20,7 @@ ul li, ol li {
 
 .header {
   margin:1px 0 0.5em 0;
-  padding:1.5em 3% 0 3%;
+  padding:1.5em 10px 0 10px;
 }
 
 .logo {
@@ -257,7 +257,6 @@ table {
   -moz-border-radius:8px;
   border-radius:8px;
 }
-
 
 @media only screen and (max-width:480px) { /* Smartphone custom styles */
 }

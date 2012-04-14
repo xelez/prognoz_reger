@@ -2,7 +2,7 @@
 
 @import url('reset.css');
 @import url('skin.css');
-
+@import url('user.css');
 
 /* Columns 
 -------
@@ -78,7 +78,7 @@ a.button { color:auto; }
     margin-bottom:0;
   }
 
-  .logo{
+  .logo {
     display:block;
     float:none;
     text-align:center;
@@ -136,10 +136,6 @@ a.button { color:auto; }
   .col_75  {
     width:98%;
     float:none;
-  } 
-  
-  .form label {
-    padding:10px 0 8px 0;
   }
 }
 

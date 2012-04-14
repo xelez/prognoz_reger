@@ -1,0 +1,46 @@
+/* (CENSORED) */
+
+#regform label {
+    float: left;
+    width: 80px;
+    text-align: left;
+}
+
+#regform .button {
+    padding: 10px 65px;
+}
+
+#maincontainer {
+    padding: 0 3%;
+}
+
+.LV_validation_message{
+    font-weight: bold;
+    margin: 0 0 0 5px;
+    white-space: nowrap;
+}
+
+.LV_valid {
+    color:#3caa3c;
+}
+	
+.LV_invalid {
+    color:#e32636;
+}
+    
+.LV_valid_field,
+input.LV_valid_field:hover, 
+input.LV_valid_field:active,
+textarea.LV_valid_field:hover, 
+textarea.LV_valid_field:active {
+    border: 1px solid #3caa3c;
+}
+    
+.LV_invalid_field, 
+input.LV_invalid_field:hover, 
+input.LV_invalid_field:active,
+textarea.LV_invalid_field:hover, 
+textarea.LV_invalid_field:active {
+    border: 1px solid #e32636;
+}
+
