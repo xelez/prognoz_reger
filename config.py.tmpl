@@ -14,9 +14,11 @@ mongo_name = 'reger'
 
 serve_static = True
 
-group_id = -1
+group_id = 1
 login_fmt = "prognoz%03d"
 passwd_len = 6
 
+admin_auth = True #Must be false when using mod_wsgi, or need additional configuration
 admin_login = "admin"
-admin_passwd = "justforfun"
+admin_passwd = "password"
+

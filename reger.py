@@ -39,7 +39,10 @@ def users_app(req):
 
     return res
 
-usersadmin_app = AuthDigestHandler(users_app, 'Users Manage', authfunc)
+if config.admin_auth:
+    usersadmin_app = AuthDigestHandler(users_app, 'Users Manage', authfunc)
+else:
+    usersadmin_app = users_app
 
 @webob_wrap
 def reg_app(req):
