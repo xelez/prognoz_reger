@@ -9,23 +9,95 @@
     {% if error is defined %}
     <p class="warning">{{error}}</p>
     {% endif %}
-    <form action="#" method="post" class="form">
-        <p>
-            <label for="surname">Фамилия&nbsp;</label>
-            <input type="text" name="surname" id="surname" value="{{user['surname']|d('')}}" />
-        </p>
-        <p>
-            <label for="name">Имя&nbsp;</label>
-            <input type="text" name="name" id="name" value="{{user['name']|d('')}}" />
-        </p>
-        <p>
-            <label for="school">Школа&nbsp;</label>
-            <input type="text" name="school" id="school" value="{{user['school']|d('')}}" />
-        </p>
-        <p>
-            <label for="year">Класс&nbsp;</label>
-            <input type="text" name="year" id="year" value="{{user['year']|d('')}}" />
-        </p>
-        <div style="padding-left: 80px;"><button type="submit" class="button">Зарегистрироваться</button></div>
-    </form>
+
+    {% if newlogin is not none %}
+    <p class="success">
+        Вы успешно зарегистрированы с логином <b>{{newlogin}}</b>.
+        Предлагаем вам зайти в <a href="http://school9.perm.ru/gate/tester/">тестирующую систему</a>
+        и прорешать пробный тур.
+    </p>
+    {% endif %}
+    
+    <div class="col_50">
+        <h1>Информация об олололимпиаде</h1>
+        <h2>Организаторы:</h2>
+        <ul>
+            <li>Прогноз</li>
+            <li>Девятка</li>
+        </ul>
+        <h3>Ололо, трололо, для таких то классов, приз такой то, бла бла бла...</h3>
+    </div>
+    
+    <div class="col_50">
+        <form action="#" method="post" class="form" id="regform">
+            <p>
+                <h3><label for="surname">Фамилия&nbsp;</label></h3>
+                <input size="40" maxlength="30" type="text" name="surname" id="surname" value="{{user['surname']|d('')}}" />
+            </p>
+            <p>
+                <h3><label for="name">Имя&nbsp;</label></h3>
+                <input size="40" maxlength="30" type="text" name="name" id="name" value="{{user['name']|d('')}}" />
+            </p>
+            <p>
+                <h3><label for="year">Класс&nbsp;</label></h3>
+                <select name="year" id="year">
+                    <option>Выбрать...</option>
+                    <option {{'selected' if (user['year']|d('') == '7') }}  value="7">7</option>
+                    <option {{'selected' if (user['year']|d('') == '8') }}  value="8">8</option>
+                    <option {{'selected' if (user['year']|d('') == '9') }}  value="9">9</option>
+                    <option {{'selected' if (user['year']|d('') == '10') }} value="10">10</option>
+                    <option {{'selected' if (user['year']|d('') == '11') }} value="11">11</option>
+                </select>
+            </p>
+            <p>
+                <h3><label for="school">Школа&nbsp;</label></h3>
+                <input size="40" maxlength="30" type="text" name="school" id="school" value="{{user['school']|d('')}}" />
+            </p>
+            <p>
+                <h3><label for="email">E-mail&nbsp;</label></h3>
+                <input size="40" maxlength="30" type="text" name="email" id="email" value="{{user['email']|d('')}}" />
+            </p>
+            <p>
+                <h3><label for="pass1">Пароль&nbsp;</label></h3>
+                <input size="40" maxlength="30" type="password" name="pass1" id="pass1" value="" />
+            </p>
+            <p>
+                <h3><label for="pass2">Еще&nbsp;раз&nbsp;</label></h3>
+                <input size="40" maxlength="30" type="password" name="pass2" id="pass2" value="" />
+            </p>
+            <div style="padding-left: 80px;"><button type="submit" class="button">Зарегистрироваться</button></div>
+        
+            <script type="text/javascript">
+                var validateName    = new LiveValidation( "name", {wait: 500} )
+                var validateSurname = new LiveValidation( "surname", {wait: 500} )
+                var validateSchool  = new LiveValidation( "school", {wait: 500} )
+                var validateYear    = new LiveValidation( "year", {wait: 500} )
+                var validateEmail   = new LiveValidation( "email", {wait: 500} )
+                var validatePass1   = new LiveValidation( "pass1", {wait: 500} )
+                var validatePass2   = new LiveValidation( "pass2", {wait: 500} )
+
+                var name_re   = /^[-а-яА-ЯёЁ]*$/i
+                var school_re = /^[\Q-_№., "'\Eа-яА-ЯёЁa-zA-Z0-9]*$/i
+                
+                validateName.add(Validate.Format,      { pattern: name_re, failureMessage: "Только русские буквы и дефис" })
+                validateSurname.add(Validate.Format,   { pattern: name_re, failureMessage: "Только русские буквы и дефис" })
+                validateSchool.add(Validate.Format,    { pattern: school_re,
+                        failureMessage: "Только русские и латинские буквы, цифры, пробел, кавычки, '№', '.', ',', '-'" })
+                validateYear.add(Validate.Numericality, { onlyInteger: true, minimum: 7, maximum: 11, failureMessage: "Выберите класс" })
+                validateEmail.add(Validate.Email,      { failureMessage: "Это не e-mail" })
+                validatePass1.add(Validate.Length, { minimum: 5, maximum: 50, failureMessage: "Допустимы пароли с длиной от 5 до 50 символов" })
+                validatePass2.add(Validate.Confirmation, { match: 'pass1', failureMessage: "Пароли не совпадают" })
+
+                validateName.add(Validate.Presence,    {failureMessage: "Обязательное поле"})
+                validateSurname.add(Validate.Presence, {failureMessage: "Обязательное поле"})
+                validateSchool.add(Validate.Presence, {failureMessage: "Обязательное поле"})
+                validateYear.add(Validate.Presence,  {failureMessage: "Обязательное поле"})
+                validateEmail.add(Validate.Presence, {failureMessage: "Обязательное поле"})
+                validatePass1.add(Validate.Presence, {failureMessage: "Обязательное поле"})
+            </script>
+
+        </form>
+    </div>
+    <div class="clearfix"></div>
+ 
 {% endblock content %}

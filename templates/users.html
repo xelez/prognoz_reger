@@ -7,31 +7,35 @@
 
 {% block content %}
 
-{% if newuser is not none %}
-    <p class="success">Вы успешно зарегистрированы
-        с логином <b><code>{{newuser['login']}}</code></b>
-        и паролем <b><code>{{newuser['passwd']}}</code></b>
-    </p>    
-{% endif %}
-
 <table class="table">
     <thead><tr>
         <th>#</th>
         <th>Логин</th>
+        {% if admin %}<th>UID</th>{% endif %}
         <th>Фамилия</th>
         <th>Имя</th>
         <th>Школа</th>
         <th>Класс</th>
+        {% if admin %}
+            <th>E-mail</th>
+            <th>Действия</th>
+        {% endif %}
+
     </tr></thead>
     <tbody>
     {% for u in users %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td>{{ u['login'] }}</td>
-            <td>{{ u['surname'] }}</td>
-            <td>{{ u['name'] }}</td>
-            <td>{{ u['school'] }}</td>
-            <td>{{ u['year'] }}</td>
+            <td>{{ u['login']   | d('') }}</td>
+            {% if admin %}<td>{{ u['uid'] | d('') }}</td>{% endif %}
+            <td>{{ u['surname'] | d('') }}</td>
+            <td>{{ u['name']    | d('') }}</td>
+            <td>{{ u['school']  | d('') }}</td>
+            <td>{{ u['year']    | d('') }}</td>
+            {% if admin %}
+                <td>{{ u['email'] | d('') }}</td>
+                <td><a href='?del={{ u['login'] | d('') }}'>Удалить</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
     </tbody>

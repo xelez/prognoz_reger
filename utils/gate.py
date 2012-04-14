@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from utils.mysql import db_insert, passwd_hash
+from utils.mysql import sql_cursor, db_insert, passwd_hash
 import time
+
+def delete_user(uid):
+    sql_cursor.execute('DELETE FROM `user` WHERE id=%s', uid)
+    sql_cursor.execute('DELETE FROM `usergroup` WHERE user_id=%s', uid)
+    sql_cursor.execute('DELETE FROM `tester_solutions` WHERE user_id=%s', uid)
 
 def add_user(name, login, passwd=u'123456', access=1, email=u'noreply@localhost', authorized=1):
     return db_insert(u'user', {
